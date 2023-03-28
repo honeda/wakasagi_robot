@@ -1,4 +1,4 @@
-from lib.servo import SG90
+from wakasagi_robot.etc.servo import SG90
 
 if __name__ == "__main__":
     servo = SG90(15)

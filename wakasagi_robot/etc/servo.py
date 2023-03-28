@@ -1,7 +1,7 @@
 from machine import Pin, PWM
 import time
 
-from utils import interval_mapping
+from wakasagi_robot.etc.utils import interval_mapping
 
 class SG90:
     """
