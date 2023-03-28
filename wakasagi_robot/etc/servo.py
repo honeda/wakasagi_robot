@@ -34,8 +34,8 @@ class SG90:
         """
         Args:
             start (int): Start angle.
-            end (int): End angle
-            step (int, optional): Step angle. Must be step > 0. Defaults to 1.
+            end (int): End angle.
+            step (int, optional): Step angle. Must be `step` > 0. Defaults to 1.
             delay (int, optional): Delay time [ms]. Defaults to 0.
         """
         if start < end:
