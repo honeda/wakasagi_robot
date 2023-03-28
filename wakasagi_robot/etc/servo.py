@@ -5,12 +5,14 @@ from wakasagi_robot.etc.utils import interval_mapping
 
 class SG90:
     """
-    SG90はパルス幅0.5msで０度, 2.5msで180度になる. そして20msごとにパルス入力を受け付ける
+    SG90 is set to 0 degree at 0.5ms pulse width, and 180 degree at 2.4ms pulse width.
+    And it accepts a pulse input every 20ms.
+    Datasheet: https://akizukidenshi.com/download/ds/towerpro/SG90_a.pdf
     """
     min_angle = 0
     max_angle = 180
     min_palse_width = 0.5
-    max_palse_width = 2.5
+    max_palse_width = 2.4
     interval = 20  # ms
 
     def __init__(self, pin_num:int):
