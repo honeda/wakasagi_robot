@@ -30,7 +30,7 @@ class SG90:
         duty = int(interval_mapping(pulse_width, 0, self.interval, 0, 65535))
         self.pin.duty_u16(duty)
 
-    def go_angle(self, start:int, end:int, step=1, delay=0):
+    def write2(self, start:int, end:int, step=1, delay=0):
         """
         Args:
             start (int): Start angle.
@@ -46,3 +46,40 @@ class SG90:
             for angle in range(start, end - 1, -step):
                 self.write(angle)
                 time.sleep_ms(self.interval + delay)
+
+class SG90_HV:
+    """360 degrees servo"""
+
+    min_speed = 0
+    max_speed = 180
+    min_palse_width = 0.5
+    max_palse_width = 2.4
+    interval = 20  # ms
+
+    def __init__(self, pin_num:int, offset=0):
+        self.pin = PWM(Pin(pin_num))
+        self.pin.freq(50)
+        self.offset = offset
+
+        self.stop_point = 90 + self.offset
+
+    def write(self, speed:int):
+        """
+        Args:
+            speed (int): 0~180
+                0~89   -> clockwise
+                91~180 -> counterclockwise
+                90 -> stop
+        """
+        pulse_width = interval_mapping(
+            speed + self.offset,
+            self.min_speed,
+            self.max_speed,
+            self.min_palse_width,
+            self.max_palse_width
+        )
+        duty = int(interval_mapping(pulse_width, 0, self.interval, 0, 65335))
+        self.pin.duty_u16(duty)
+
+    def stop(self):
+        self.write(self.stop_point)
