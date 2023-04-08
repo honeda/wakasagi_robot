@@ -15,9 +15,8 @@ def awase(servo, hit_sensor):
 
 if __name__ == "__main__":
 
-    servo = SG90(15)
-    hit_sensor = HitDetector(17)
-    led = Pin(14, Pin.OUT)
+    servo = SG90(PWM(Pin(15, Pin.OUT)))
+    hit_sensor = HitDetector(Pin(17, Pin.OUT, Pin.PULL_DOWN))
 
     servo.write2(AWASE_ANGLE, START_ANGLE, delay=10)
     for _ in range(3):

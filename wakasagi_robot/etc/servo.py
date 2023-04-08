@@ -15,8 +15,8 @@ class SG90:
     max_palse_width = 2.4
     interval = 20  # ms
 
-    def __init__(self, pin_num:int):
-        self.pin = PWM(Pin(pin_num))
+    def __init__(self, pin: PWM):
+        self.pin = pin
         self.pin.freq(50)
 
     def write(self, angle:int):
@@ -56,8 +56,8 @@ class SG90_HV:
     max_palse_width = 2.4
     interval = 20  # ms
 
-    def __init__(self, pin_num:int, offset=0):
-        self.pin = PWM(Pin(pin_num))
+    def __init__(self, pin: PWM, offset=0):
+        self.pin = pin
         self.pin.freq(50)
         self.offset = offset
 
@@ -78,7 +78,7 @@ class SG90_HV:
             self.min_palse_width,
             self.max_palse_width
         )
-        duty = int(interval_mapping(pulse_width, 0, self.interval, 0, 65335))
+        duty = int(interval_mapping(pulse_width, 0, self.interval, 0, 65535))
         self.pin.duty_u16(duty)
 
     def stop(self):

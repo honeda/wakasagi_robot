@@ -4,8 +4,12 @@ import time
 
 class HitDetector:
 
-    def __init__(self, pin_num:int):
-        self.pin = Pin(pin_num, Pin.IN, Pin.PULL_DOWN)
+    def __init__(self, pin:Pin):
+        """
+        Args:
+            pin (Pin): Pull dowm pin. ex) `Pin(10, Pin.OUT, Pin.PULL_DOWN)`
+        """
+        self.pin = pin
         self.last_called_time = time.ticks_ms()
         self.callback = self._default_callback
 
@@ -30,7 +34,6 @@ class HitDetector:
             return
         else:
             self.last_called_time = time.ticks_ms()
-            print(111)
             self.callback()
 
     def _default_callback(self):
